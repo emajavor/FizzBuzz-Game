@@ -2,6 +2,7 @@ package com.example.fzzbzz
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,20 +21,21 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.fzzbzz.ui.theme.FzzBzzTheme
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+//import kotlinx.coroutines.CoroutineScope
+//import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        Thread.sleep(2000)
+        installSplashScreen()
         setContent {
             TopAppBar(
                 backgroundColor = Color.White,
-
-
                 title = {
                 Text(
                     modifier = Modifier.fillMaxWidth(),

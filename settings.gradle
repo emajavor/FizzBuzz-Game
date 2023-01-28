@@ -10,7 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+
     }
 }
 rootProject.name = "FzzBzz"
 include ':app'
+//startParameter.offline=false

@@ -1,5 +1,6 @@
 package com.example.fzzbzz
 
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -31,17 +32,37 @@ val fontFamily = FontFamily(
 @Composable
 fun Navigation(){
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.MainScreen.route){
+    navController.popBackStack()
+    val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
+
+
+    NavHost(navController = navController, startDestination = Screen.LoginApplication.route){
+        composable(route = Screen.LoginApplication.route){
+            LoginApplication(navController = navController)
+        }
+        composable(route = Screen.RegisterApplication.route){
+            RegisterApplication(navController = navController)
+        }
         composable(route = Screen.MainScreen.route){
             MainScreen(navController = navController)
         }
         composable(
             route = Screen.GameOverScreen.route
-
         ){
             GameOverScreen(navController = navController)
         }
     }
+}
+
+@Composable
+fun LoginApplication(navController: NavController){
+    LoginPage(navController)
+
+}
+
+@Composable
+fun RegisterApplication(navController: NavController){
+    RegisterPage(navController)
 }
 
 
@@ -72,6 +93,8 @@ fun MainScreen(navController: NavController){
 
         Row(
         ) {
+            val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
+
             Button(
                 modifier = Modifier
                     .height(40.dp)
@@ -80,6 +103,7 @@ fun MainScreen(navController: NavController){
                     backgroundColor =  Color(60,82,145),
                     contentColor = Color.White),
                 onClick = {
+
                 if (state.value % 3 == 0 && state.value % 5 != 0){
                     state.value += 1
 
@@ -87,7 +111,9 @@ fun MainScreen(navController: NavController){
                 else
                     navController.navigate(Screen.GameOverScreen.route)
 
-            }
+
+
+                }
             ) {
                 Text(text = "FIZZ")
             }
@@ -145,7 +171,6 @@ fun MainScreen(navController: NavController){
                 }
                 else
                     navController.navigate(Screen.GameOverScreen.route)
-
 
             }
             ) {
