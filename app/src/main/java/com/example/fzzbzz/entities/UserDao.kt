@@ -12,6 +12,9 @@ interface UserDao {
     @Query("SELECT * FROM user_table")
     fun getAllUsers(): List<User>
 
+    @Query("SELECT userName, highscore FROM user_table")
+    fun getHS(): List<User>
+
     @Update
     suspend fun updateUserDetails(user: User)
 
